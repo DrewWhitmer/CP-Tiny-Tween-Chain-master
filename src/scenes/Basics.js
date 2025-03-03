@@ -20,6 +20,7 @@ class Basics extends Phaser.Scene {
 
         // add sprites
         let tomato = this.add.sprite(centerX, centerY, 'fruitandveg', 'tomato')
+        let pear = this.add.sprite(64, 64, 'fruitandveg', 'pear');
 
         // add text
         this.instructionText = this.add.bitmapText(centerX, centerY, 'gem_font', '', 24).setOrigin(0.5)
@@ -49,6 +50,56 @@ class Basics extends Phaser.Scene {
             }
         })
 
+        //pear tween chain
+        let pearTweenChain = this.tweens.chain({
+            targets: pear,
+            ease: 'Bounce.easeOut',
+            loop: 1,
+            paused: true,
+            tweens: [
+                {
+                    x: w - 64,
+                    duration: 500,
+                },
+                {
+                    angle: 90,
+                    duration: 500
+                },
+                {
+                    y: h - 64,
+                    duration: 1000,
+                    ease: 'Sine.easeOut',
+                },
+                {
+                    angle: 180,
+                    duration: 500
+                },
+                {
+                    x: 64,
+                    duration: 1500,
+                },
+                {
+                    angle: -90,
+                    duration: 500
+                },
+                {
+                    y: 64,
+                    duration: 1000,
+                },
+                {
+                    angle: 0,
+                    duration: 500
+                },
+            ]
+        })
+
+        //add moue input listener
+        this.input.on('pointerdown', () => {
+            pear.setPosition(64, 64);
+            pear.setRotation(0);
+            pearTweenChain.restart();
+        });
+
         // enable scene reload key
         this.reload = this.input.keyboard.addKey('R')
 
@@ -61,5 +112,6 @@ class Basics extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
             this.scene.restart()
         }
+
     }
 }

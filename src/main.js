@@ -1,6 +1,6 @@
 // Code Practice: Tiny Tween Chain
-// Name:
-// Date:
+// Name: Drew Whitmer
+// Date: 03/03/25
 
 // CODE ARMOR
 'use strict'
